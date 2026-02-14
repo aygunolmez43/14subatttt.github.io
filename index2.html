@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerimiz ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  background: black;
+  font-family: sans-serif;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(40px);
+  transform: scale(1.1);
+}
+
+img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 90%;
+  max-height: 90%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  border-radius: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+const totalPhotos = 42;
+let current = 0;
+
+// 🎵 Müzik Ayarı
+const audio = new Audio("muzik.mp3");
+audio.loop = true;
+audio.volume = 0; // Başlangıçta sessiz
+
+// ✅ Düzgün fade in fonksiyonu
+function fadeIn(audio, duration = 3000, targetVolume = 0.6) {
+    let step = 0.01; // Ses artış miktarı
+    let intervalTime = duration * step; // interval süresi
+    let fade = setInterval(() => {
+        if (audio.volume < targetVolume) {
+            audio.volume = Math.min(audio.volume + step, targetVolume);
+        } else {
+            clearInterval(fade);
+        }
+    }, intervalTime);
+}
+
+// Kullanıcı tıklayınca müzik başlar ve fade in yapılır
+document.addEventListener("click", () => {
+    audio.play().then(() => {
+        fadeIn(audio, 3000, 0.6); // 3 saniyede 0.6 sese yükselir
+    }).catch(err => console.log("Müzik çalınamadı:", err));
+}, { once: true });
+
+// 📸 Slide oluşturma
+for (let i = 1; i <= totalPhotos; i++) {
+  const slide = document.createElement("div");
+  slide.className = "slide";
+  if (i === 1) slide.classList.add("active");
+
+  slide.innerHTML = `
+    <div class="bg" style="background-image:url('fotograflar/${i}.jpeg')"></div>
+    <img src="fotograflar/${i}.jpeg">
+  `;
+  document.body.appendChild(slide);
+}
+
+const slides = document.querySelectorAll(".slide");
+
+// 🔄 Foto geçiş sistemi
+setInterval(() => {
+  slides[current].classList.remove("active");
+  current = (current + 1) % slides.length;
+  slides[current].classList.add("active");
+}, 4000);
+
+</script>
+
+</body>
+</html>
