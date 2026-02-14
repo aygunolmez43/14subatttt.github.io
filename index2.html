@@ -80,7 +80,7 @@ document.addEventListener("click", () => {
 }, { once: true });
 
 // 📸 Slide oluşturma
-for (let i = 1; i <= totalPhotos; i++) {
+for (let i = 0; i <= totalPhotos; i++) {
   const slide = document.createElement("div");
   slide.className = "slide";
   if (i === 1) slide.classList.add("active");
@@ -105,3 +105,4 @@ setInterval(() => {
 
 </body>
 </html>
+
