@@ -51,7 +51,7 @@ img {
 <body>
 
 <script>
-const totalPhotos = 49;
+const totalPhotos = 50;
 let current = 0;
 
 // 🎵 Müzik Ayarı
@@ -80,10 +80,10 @@ document.addEventListener("click", () => {
 }, { once: true });
 
 // 📸 Slide oluşturma
-for (let i = 0; i <= totalPhotos; i++) {
+for (let i = -1; i <= totalPhotos; i++) {
   const slide = document.createElement("div");
   slide.className = "slide";
-  if (i === 0) slide.classList.add("active");
+  if (i === -1) slide.classList.add("active");
 
   slide.innerHTML = `
     <div class="bg" style="background-image:url('fotograflar/${i}.jpeg')"></div>
@@ -105,6 +105,7 @@ setInterval(() => {
 
 </body>
 </html>
+
 
 
 
