@@ -83,7 +83,7 @@ document.addEventListener("click", () => {
 for (let i = 0; i <= totalPhotos; i++) {
   const slide = document.createElement("div");
   slide.className = "slide";
-  if (i === 1) slide.classList.add("active");
+  if (i === 0) slide.classList.add("active");
 
   slide.innerHTML = `
     <div class="bg" style="background-image:url('fotograflar/${i}.jpeg')"></div>
@@ -105,4 +105,5 @@ setInterval(() => {
 
 </body>
 </html>
+
 
